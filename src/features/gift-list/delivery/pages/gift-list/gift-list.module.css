@@ -1,0 +1,50 @@
+.subtitle {
+  margin: 12px 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.gift-list {
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gift-list__header {
+  padding: 0 24px;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gift-list__header__title {
+  font-size: large;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.gift-list__header__owner {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--light-grey);
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  font-size: small;
+}
+
+.gift-list__description {
+  margin: 24px 24px 24px 24px;
+  color: var(--dark-grey);
+}
+
+.gift-list__gifts {
+  margin: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  list-style: none;
+}

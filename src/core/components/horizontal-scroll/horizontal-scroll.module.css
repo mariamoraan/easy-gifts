@@ -1,0 +1,75 @@
+.horizontal-scroll-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.horizontal-scroll {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  transition: 800ms ease;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+
+.arrow-button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  margin: auto;
+  height: max-content;
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  background: white;
+  border-radius: 100%;
+  transition: 200ms ease;
+}
+
+.arrow-button:disabled {
+  opacity: 0;
+}
+
+.arrow-button--left {
+  left: 0;
+}
+
+.arrow-button--right {
+  right: 0;
+}
+
+@media (hover: none) {
+  .horizontal-scroll-wrapper {
+    position: relative;
+    overflow: auto;
+    padding-right: 25px;
+  }
+  .arrow-button {
+    display: none;
+  }
+}
