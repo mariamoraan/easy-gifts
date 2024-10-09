@@ -14,17 +14,22 @@ interface Props {
 
 export const HorizontalScroll = (props: Props) => {
   const { children, className = '', gap = 8, marginOffset = 0 } = props;
-  const wrapperRef = useRef<HTMLDivElement | undefined>();
-  const listRef = useRef<HTMLDivElement | undefined>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const GAP_SPACE = (React.Children.count(children) * gap) / 2;
   const [translate, setTranslate] = useState(0);
   const [isGoLeftDisabled, setIsGoLeftDisabled] = useState(false);
   const [isGoRightDisabled, setIsGoRightDisabled] = useState(false);
 
   const getIsGoLeftDisabled = () => translate === 0;
-  const getIsGoRightDisabled = () =>
-    translate <= listRef.current?.offsetWidth * -1 + wrapperRef.current?.offsetWidth + GAP_SPACE ||
-    listRef.current?.offsetWidth < wrapperRef.current?.offsetWidth;
+  const getIsGoRightDisabled = () => {
+    if (listRef?.current && wrapperRef?.current) {
+      return (
+        translate <= listRef.current?.offsetWidth * -1 + wrapperRef.current?.offsetWidth + GAP_SPACE ||
+        listRef.current?.offsetWidth < wrapperRef.current?.offsetWidth
+      );
+    } else return false;
+  };
 
   const goLeft = () => {
     if (!wrapperRef.current || !wrapperRef.current.offsetWidth) return;
