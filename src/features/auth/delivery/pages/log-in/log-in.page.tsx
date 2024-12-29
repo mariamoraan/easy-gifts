@@ -30,6 +30,8 @@ export const LoginPage = () => {
     }
   };
 
+  const isSubmitDisabled = !credentials.email || !credentials.password;
+
   return (
     <div className={cn("page")}>
       <h1 className={cn("page__title")}> {t("auth.login.welcome")}</h1>
@@ -65,7 +67,11 @@ export const LoginPage = () => {
             setCredentials((prev) => ({ ...prev, password: e.target.value }))
           }
         />
-        <Button className={cn("page__form__submit-button")} type="submit">
+        <Button
+          disabled={isSubmitDisabled}
+          className={cn("page__form__submit-button")}
+          type="submit"
+        >
           {t("auth.login.continue")}
         </Button>
       </form>

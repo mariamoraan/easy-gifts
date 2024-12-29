@@ -32,6 +32,9 @@ export const SignUpPage = () => {
     }
   };
 
+  const isSubmitDisabled =
+    !userInfo.email || !userInfo.password || !userInfo.name;
+
   return (
     <div className={cn("page")}>
       <h1 className={cn("page__title")}>
@@ -83,7 +86,11 @@ export const SignUpPage = () => {
             setUserInfo((prev) => ({ ...prev, password: e.target.value }))
           }
         />
-        <Button className={cn("page__form__submit-button")} type="submit">
+        <Button
+          disabled={isSubmitDisabled}
+          className={cn("page__form__submit-button")}
+          type="submit"
+        >
           {t("auth.sign-up.create-account")}
         </Button>
       </form>
