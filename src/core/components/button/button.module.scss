@@ -1,6 +1,6 @@
 .button {
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: ease 200ms;
 
   &--primary {
     padding: 16px 12px;
@@ -15,5 +15,11 @@
     border: none;
     background: none;
     outline: none;
+  }
+
+  &--disabled {
+    background: var(--disabled-button-background-color);
+    color: var(--on-disabled-button-background-color);
+    cursor: default;
   }
 }

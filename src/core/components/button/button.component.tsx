@@ -32,6 +32,7 @@ export const Button = (props: Props) => {
         {
           "button--primary": !outlined,
           "button--outlined": outlined,
+          "button--disabled": disabled,
         },
         className
       )}

@@ -4,6 +4,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { AuthRepository } from "../domain/auth.repository";
@@ -89,5 +90,9 @@ export class AuthFirebaseRepository implements AuthRepository {
       .catch(() => {
         // An error happened.
       });
+  }
+
+  public async resetPassword(email: string): Promise<void> {
+    await sendPasswordResetEmail(this.auth, email);
   }
 }

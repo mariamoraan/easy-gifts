@@ -2,7 +2,7 @@ import { useState } from "react";
 import { bind } from "../../../../../core/styles/bind";
 import styles from "./log-in.module.scss";
 import { useAuth } from "../../context/auth.context";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AppRoutes } from "../../../../../core/router/routes";
 import { Credentials } from "../../../domain/entities/credentials";
 import { Button } from "../../../../../core/components/button/button.component";
@@ -11,7 +11,7 @@ const cn = bind(styles);
 
 export const LoginPage = () => {
   const { t } = useTranslation();
-  const { login, user } = useAuth();
+  const { login } = useAuth();
   const [error, setError] = useState("");
   const [credentials, setCredentials] = useState<Credentials>({
     email: "",
@@ -25,12 +25,10 @@ export const LoginPage = () => {
     } catch (error) {
       if (error instanceof Error) setError(error.message);
       else {
-        setError("Se ha producido un error");
+        setError(t("auth.errors.generic"));
       }
     }
   };
-
-  if (user?.id) return <Navigate to={AppRoutes.HOME} />;
 
   return (
     <div className={cn("page")}>
@@ -76,7 +74,7 @@ export const LoginPage = () => {
       )}
       <p className={cn("page__privacy-text")}>
         {t("auth.login.forgot-credentials")}{" "}
-        <NavLink to={AppRoutes.LOGIN}>
+        <NavLink to={AppRoutes.RECOVER_PASSWORD}>
           {" "}
           {t("auth.login.recover-password")}
         </NavLink>

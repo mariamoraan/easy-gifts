@@ -2,7 +2,7 @@ import { useState } from "react";
 import { bind } from "../../../../../core/styles/bind";
 import styles from "./sign-up.module.scss";
 import { useAuth } from "../../context/auth.context";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AppRoutes } from "../../../../../core/router/routes";
 import { UserInfo } from "../../../domain/entities/user-info";
 import { Credentials } from "../../../domain/entities/credentials";
@@ -12,7 +12,7 @@ const cn = bind(styles);
 
 export const SignUpPage = () => {
   const { t } = useTranslation();
-  const { signUp, user } = useAuth();
+  const { signUp } = useAuth();
   const [error, setError] = useState("");
   const [userInfo, setUserInfo] = useState<UserInfo & Credentials>({
     name: "",
@@ -27,12 +27,10 @@ export const SignUpPage = () => {
     } catch (error) {
       if (error instanceof Error) setError(error.message);
       else {
-        setError("Se ha producido un error");
+        setError(t("auth.errors.generic"));
       }
     }
   };
-
-  if (user?.id) return <Navigate to={AppRoutes.HOME} />;
 
   return (
     <div className={cn("page")}>

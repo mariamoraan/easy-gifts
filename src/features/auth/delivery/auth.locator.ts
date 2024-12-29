@@ -2,6 +2,7 @@ import { LoginCommand } from "../application/commands/login.command";
 import { LogoutCommand } from "../application/commands/logout.command";
 import { SignUpCommand } from "../application/commands/sign-up.command";
 import { FindLoggedUserQuery } from "../application/queries/find-logged-user.query";
+import { RecoverPasswordQuery } from "../application/queries/recover-password.query";
 import { AuthRepository } from "../domain/auth.repository";
 import { AuthFirebaseRepository } from "../infrastructure/auth-firebase.repository";
 
@@ -20,5 +21,8 @@ export class AuthLocator {
   }
   static getFindLoggedUserQuery() {
     return new FindLoggedUserQuery(this.getRepository());
+  }
+  static getRecoverPasswordQuery() {
+    return new RecoverPasswordQuery(this.getRepository());
   }
 }

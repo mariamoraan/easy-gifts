@@ -10,4 +10,5 @@ export interface AuthRepository {
   login: (credentials: Credentials) => Promise<User | undefined>;
   logout: () => Promise<void>;
   getLoggedUser: () => Promise<User | undefined>;
+  resetPassword: (email: string) => Promise<void>;
 }
