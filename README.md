@@ -125,7 +125,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [ ] Add auth
+- [x] Add auth
 - [ ] Add wish creation
 - [ ] Add friends management
 - [ ] Add event creation
