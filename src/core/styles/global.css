@@ -6,8 +6,8 @@
   --on-input-background-color: #9c939f;
   --button-background-color: #6c56f2;
   --on-button-background-color: white;
-  --disabled-button-background-color: #cccccc;
-  --on-disabled-button-background-color: #666666;
+  --disabled-button-background-color: #e5e5e5;
+  --on-disabled-button-background-color: #bdbdbd;
   --error-color: red;
   --success-color: green;
 
