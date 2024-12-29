@@ -3,7 +3,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -15,19 +14,8 @@ import { UserInfo } from "../domain/entities/user-info";
 import { User } from "../domain/entities/user";
 
 export class AuthFirebaseRepository implements AuthRepository {
-  private readonly userUIDKey = "USER_UID";
   private auth = getAuth();
   private db = getFirestore(app);
-
-  constructor() {
-    onAuthStateChanged(this.auth, (user) => {
-      if (user) {
-        localStorage.setItem(this.userUIDKey, user.uid);
-      } else {
-        localStorage.removeItem(this.userUIDKey);
-      }
-    });
-  }
 
   public async signup(
     user: UserInfo,
@@ -67,7 +55,7 @@ export class AuthFirebaseRepository implements AuthRepository {
   }
 
   public async getLoggedUser(): Promise<User | undefined> {
-    const userUID = localStorage.getItem(this.userUIDKey) ?? undefined;
+    const userUID = this.auth.currentUser?.uid ?? undefined;
     if (!userUID) return undefined;
     const currentUser = await this.getUserById(userUID);
     return currentUser;
