@@ -7,10 +7,13 @@ import { AppRoutes } from "../../../../../core/router/routes";
 import { UserInfo } from "../../../domain/entities/user-info";
 import { Credentials } from "../../../domain/entities/credentials";
 import { Button } from "../../../../../core/components/button/button.component";
+import { useTranslation } from "react-i18next";
 const cn = bind(styles);
 
 export const SignUpPage = () => {
+  const { t } = useTranslation();
   const { signUp, user } = useAuth();
+  const [error, setError] = useState("");
   const [userInfo, setUserInfo] = useState<UserInfo & Credentials>({
     name: "",
     email: "",
@@ -19,48 +22,58 @@ export const SignUpPage = () => {
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    await signUp(userInfo, userInfo);
+    try {
+      await signUp(userInfo, userInfo);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else {
+        setError("Se ha producido un error");
+      }
+    }
   };
 
   if (user?.id) return <Navigate to={AppRoutes.HOME} />;
 
   return (
     <div className={cn("page")}>
-      <h1 className={cn("page__title")}>Create an account</h1>
+      <h1 className={cn("page__title")}>
+        {t("auth.sign-up.create-an-account")}
+      </h1>
       <p className={cn("page__text")}>
-        Already have an account? <NavLink to={AppRoutes.LOGIN}>Login</NavLink>
+        {t("auth.sign-up.already-have-an-account")}{" "}
+        <NavLink to={AppRoutes.LOGIN}> {t("auth.sign-up.login")}</NavLink>
       </p>
       <form onSubmit={onSubmit} className={cn("page__form")}>
         <label htmlFor="fname" className={cn("page__form__label")}>
-          Nombre
+          {t("auth.name")}
         </label>
         <input
           id="fname"
           name="fname"
           className={cn("page__form__input")}
           type="text"
-          placeholder="Name"
+          placeholder={t("auth.name-placeholder")}
           value={userInfo?.name}
           onChange={(e) =>
             setUserInfo((prev) => ({ ...prev, name: e.target.value }))
           }
         />
         <label htmlFor="femail" className={cn("page__form__label")}>
-          Email
+          {t("auth.email")}
         </label>
         <input
           id="femail"
           name="femail"
           className={cn("page__form__input")}
           type="email"
-          placeholder="email@domain.com"
+          placeholder={t("auth.email-placeholder")}
           value={userInfo?.email}
           onChange={(e) =>
             setUserInfo((prev) => ({ ...prev, email: e.target.value }))
           }
         />
         <label htmlFor="fpassword" className={cn("page__form__label")}>
-          Password
+          {t("auth.password")}
         </label>
         <input
           id="fpassword"
@@ -73,9 +86,12 @@ export const SignUpPage = () => {
           }
         />
         <Button className={cn("page__form__submit-button")} type="submit">
-          Create Account
+          {t("auth.sign-up.create-account")}
         </Button>
       </form>
+      {error && (
+        <p className={cn("page__error")}> {t(`auth.errors.${error}`)}</p>
+      )}
       <p className={cn("page__privacy-text")}>
         By clicking Create Account you agree to Wishlist <a>Terms of use</a> and{" "}
         <a>Privacy policy</a>

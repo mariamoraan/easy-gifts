@@ -26,7 +26,6 @@ const AuthContext = createContext<AuthState>({
 
 export const AuthProvider = ({ children }: React.PropsWithChildren) => {
   const [user, setUser] = useState<User | undefined>();
-
   useEffect(() => {
     const setup = async () => {
       const user = await AuthLocator.getFindLoggedUserQuery().handle();
@@ -48,17 +47,27 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
   const signUp = async (userInfo: UserInfo, credentials: Credentials) => {
     if (!isValidUserInfo(userInfo)) return;
     if (!isValidCredentials(credentials)) return;
-    const user = await AuthLocator.getSignUpCommand().handle(
-      userInfo,
-      credentials
-    );
-    setUser(user);
+    try {
+      const user = await AuthLocator.getSignUpCommand().handle(
+        userInfo,
+        credentials
+      );
+      setUser(user);
+    } catch (error: any) {
+      if (error?.code) throw Error(error?.code);
+      throw Error(JSON.stringify(error));
+    }
   };
 
   const login = async (credentials: Credentials) => {
     if (!isValidCredentials(credentials)) return;
-    const user = await AuthLocator.getLoginCommand().handle(credentials);
-    setUser(user);
+    try {
+      const user = await AuthLocator.getLoginCommand().handle(credentials);
+      setUser(user);
+    } catch (error: any) {
+      if (error?.code) throw Error(error?.code);
+      throw Error(JSON.stringify(error));
+    }
   };
 
   const logout = async () => {

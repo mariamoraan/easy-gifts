@@ -32,26 +32,21 @@ export class AuthFirebaseRepository implements AuthRepository {
     user: UserInfo,
     credentials: Credentials
   ): Promise<User | undefined> {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        this.auth,
-        user.email,
-        credentials.password
-      );
-      await setDoc(doc(this.db, "users", userCredential.user.uid), {
-        name: user.name,
-        email: user.email,
-      });
-      const currentUser: User = {
-        id: userCredential.user.uid,
-        name: user.name,
-        email: user.email,
-      };
-      return currentUser;
-    } catch (error: unknown) {
-      console.log("Error while signup: ", error);
-      return undefined;
-    }
+    const userCredential = await createUserWithEmailAndPassword(
+      this.auth,
+      user.email,
+      credentials.password
+    );
+    await setDoc(doc(this.db, "users", userCredential.user.uid), {
+      name: user.name,
+      email: user.email,
+    });
+    const currentUser: User = {
+      id: userCredential.user.uid,
+      name: user.name,
+      email: user.email,
+    };
+    return currentUser;
   }
 
   private async getUserById(userId: string): Promise<User | undefined> {
@@ -78,18 +73,13 @@ export class AuthFirebaseRepository implements AuthRepository {
   }
 
   public async login(credentials: Credentials): Promise<User | undefined> {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        this.auth,
-        credentials.email,
-        credentials.password
-      );
-      const currentUser = await this.getUserById(userCredential.user.uid);
-      return currentUser;
-    } catch (error: unknown) {
-      console.log("Error while login: ", error);
-      return undefined;
-    }
+    const userCredential = await signInWithEmailAndPassword(
+      this.auth,
+      credentials.email,
+      credentials.password
+    );
+    const currentUser = await this.getUserById(userCredential.user.uid);
+    return currentUser;
   }
   public async logout(): Promise<void> {
     signOut(this.auth)

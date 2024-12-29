@@ -6,10 +6,13 @@ import { Navigate, NavLink } from "react-router-dom";
 import { AppRoutes } from "../../../../../core/router/routes";
 import { Credentials } from "../../../domain/entities/credentials";
 import { Button } from "../../../../../core/components/button/button.component";
+import { useTranslation } from "react-i18next";
 const cn = bind(styles);
 
 export const LoginPage = () => {
+  const { t } = useTranslation();
   const { login, user } = useAuth();
+  const [error, setError] = useState("");
   const [credentials, setCredentials] = useState<Credentials>({
     email: "",
     password: "",
@@ -17,20 +20,28 @@ export const LoginPage = () => {
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    await login(credentials);
+    try {
+      await login(credentials);
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else {
+        setError("Se ha producido un error");
+      }
+    }
   };
 
   if (user?.id) return <Navigate to={AppRoutes.HOME} />;
 
   return (
     <div className={cn("page")}>
-      <h1 className={cn("page__title")}>Welcome back !</h1>
+      <h1 className={cn("page__title")}> {t("auth.login.welcome")}</h1>
       <p className={cn("page__text")}>
-        Not have an account? <NavLink to={AppRoutes.SIGN_UP}>Sign Up</NavLink>
+        {t("auth.login.not-have-an-account")}{" "}
+        <NavLink to={AppRoutes.SIGN_UP}>{t("auth.login.sign-up")}</NavLink>
       </p>
       <form onSubmit={onSubmit} className={cn("page__form")}>
         <label htmlFor="femail" className={cn("page__form__label")}>
-          Email
+          {t("auth.email")}
         </label>
         <input
           id="femail"
@@ -38,13 +49,13 @@ export const LoginPage = () => {
           className={cn("page__form__input")}
           type="email"
           value={credentials?.email}
-          placeholder="email@domain.com"
+          placeholder={t("auth.email-placeholder")}
           onChange={(e) =>
             setCredentials((prev) => ({ ...prev, email: e.target.value }))
           }
         />
         <label htmlFor="fpassword" className={cn("page__form__label")}>
-          Password
+          {t("auth.password")}
         </label>
         <input
           id="fpassword"
@@ -57,12 +68,18 @@ export const LoginPage = () => {
           }
         />
         <Button className={cn("page__form__submit-button")} type="submit">
-          Continuar
+          {t("auth.login.continue")}
         </Button>
       </form>
-      <p className={cn("page__text")}>
-        Forgot your credentials?{" "}
-        <NavLink to={AppRoutes.LOGIN}>Recover Password</NavLink>
+      {error && (
+        <p className={cn("page__error")}> {t(`auth.errors.${error}`)}</p>
+      )}
+      <p className={cn("page__privacy-text")}>
+        {t("auth.login.forgot-credentials")}{" "}
+        <NavLink to={AppRoutes.LOGIN}>
+          {" "}
+          {t("auth.login.recover-password")}
+        </NavLink>
       </p>
     </div>
   );
