@@ -15,17 +15,18 @@ export const WishCard = (props: Props) => {
   const imagesList = useRef<HTMLUListElement>(null);
   const [imagesListScroll, setImagesListScroll] = useState(0);
 
-  const maxScrollLeft = imagesList.current?.scrollWidth
+  const maxScrollLeft: number | undefined = imagesList.current?.scrollWidth
     ? imagesList.current?.scrollWidth - imagesList.current?.clientWidth
     : undefined;
-  const isVisibleImagesListLeftArrow = imagesListScroll !== 0;
-  const isVisibleImagesListRightArrow =
-    !maxScrollLeft || maxScrollLeft > imagesListScroll;
+  const isVisibleImagesListLeftArrow: boolean = imagesListScroll !== 0;
+  const isVisibleImagesListRightArrow: boolean =
+    maxScrollLeft === undefined || maxScrollLeft > imagesListScroll;
 
-  const MAX_IMAGE_WIDTH = 130;
-  const IMAGES_GAP = 8;
-  const isSmallDevice = window.innerWidth <= 600;
-  const SCROLL_SIZE = (MAX_IMAGE_WIDTH + IMAGES_GAP) * (isSmallDevice ? 2 : 3);
+  const MAX_IMAGE_WIDTH: number = 130;
+  const IMAGES_GAP: number = 8;
+  const isSmallDevice: boolean = window.innerWidth <= 600;
+  const SCROLL_SIZE: number =
+    (MAX_IMAGE_WIDTH + IMAGES_GAP) * (isSmallDevice ? 2 : 3);
 
   const scrollOnImagesList = (direction: "RIGHT" | "LEFT") => {
     const scrollLeft = Math.max(imagesListScroll - SCROLL_SIZE, 0);
@@ -43,17 +44,20 @@ export const WishCard = (props: Props) => {
       {wish.description && (
         <p className={cn("wish__description")}>{wish.description}</p>
       )}
-      <div className={cn("wish__images")}>
-        {isVisibleImagesListLeftArrow && (
-          <Button
-            outlined
-            onClick={() => scrollOnImagesList("LEFT")}
-            className={cn("wish__images__button", "wish__images__button--left")}
-          >
-            <ArrowLeftIcon />
-          </Button>
-        )}
-        {wish.imageUrls && (
+      {wish.imageUrls && (
+        <div className={cn("wish__images")}>
+          {isVisibleImagesListLeftArrow && (
+            <Button
+              outlined
+              onClick={() => scrollOnImagesList("LEFT")}
+              className={cn(
+                "wish__images__button",
+                "wish__images__button--left"
+              )}
+            >
+              <ArrowLeftIcon />
+            </Button>
+          )}
           <ul ref={imagesList} className={cn("wish__images__list")}>
             {wish.imageUrls.map((imageUrl) => (
               <li className={cn("wish__images__list__li")} key={imageUrl}>
@@ -64,24 +68,28 @@ export const WishCard = (props: Props) => {
               </li>
             ))}
           </ul>
-        )}
-        {isVisibleImagesListRightArrow && (
-          <Button
-            outlined
-            onClick={() => scrollOnImagesList("RIGHT")}
-            className={cn(
-              "wish__images__button",
-              "wish__images__button--right"
-            )}
-          >
-            <ArrowRightIcon />
-          </Button>
-        )}
-      </div>
+          {isVisibleImagesListRightArrow && (
+            <Button
+              outlined
+              onClick={() => scrollOnImagesList("RIGHT")}
+              className={cn(
+                "wish__images__button",
+                "wish__images__button--right"
+              )}
+            >
+              <ArrowRightIcon />
+            </Button>
+          )}
+        </div>
+      )}
       <ul className={cn("wish__links__list")}>
         {wish.links?.map((link) => (
           <li className={cn("wish__links__list__li")} key={link.url}>
-            <a className={cn("wish__links__list__li__link")} href={link.url}>
+            <a
+              target="_blank"
+              className={cn("wish__links__list__li__link")}
+              href={link.url}
+            >
               {link.name}
             </a>
           </li>

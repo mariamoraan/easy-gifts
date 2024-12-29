@@ -63,7 +63,7 @@
       display: flex;
       gap: 8px 12px;
       flex-wrap: wrap;
-      &__li {
+      &__li:not(:last-child) {
         &::after {
           content: "•";
           margin-left: 12px;
