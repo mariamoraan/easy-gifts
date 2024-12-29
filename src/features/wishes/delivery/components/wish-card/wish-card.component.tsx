@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { bind } from "../../../../../core/styles/bind";
 import { Wish } from "../../../domain/entities/wish.entity";
 import styles from "./wish-card.module.scss";
@@ -10,21 +10,24 @@ interface Props {
   wish: Wish;
 }
 
+const MAX_IMAGE_WIDTH: number = 130;
+const IMAGES_GAP: number = 8;
+
 export const WishCard = (props: Props) => {
   const { wish } = props;
   const imagesList = useRef<HTMLUListElement>(null);
+  const [maxScrollLeft, setMaxScrollLeft] = useState(
+    imagesList.current?.scrollWidth
+      ? imagesList.current?.scrollWidth - imagesList.current?.clientWidth
+      : undefined
+  );
+  const [isSmallDevice, setIsSmallDevice] = useState(window.innerWidth <= 600);
   const [imagesListScroll, setImagesListScroll] = useState(0);
 
-  const maxScrollLeft: number | undefined = imagesList.current?.scrollWidth
-    ? imagesList.current?.scrollWidth - imagesList.current?.clientWidth
-    : undefined;
   const isVisibleImagesListLeftArrow: boolean = imagesListScroll !== 0;
   const isVisibleImagesListRightArrow: boolean =
     maxScrollLeft === undefined || maxScrollLeft > imagesListScroll;
 
-  const MAX_IMAGE_WIDTH: number = 130;
-  const IMAGES_GAP: number = 8;
-  const isSmallDevice: boolean = window.innerWidth <= 600;
   const SCROLL_SIZE: number =
     (MAX_IMAGE_WIDTH + IMAGES_GAP) * (isSmallDevice ? 2 : 3);
 
@@ -37,6 +40,15 @@ export const WishCard = (props: Props) => {
     imagesList.current?.scroll(scroll, 0);
     setImagesListScroll(scroll);
   };
+
+  useEffect(() => {
+    setMaxScrollLeft(
+      imagesList.current?.scrollWidth
+        ? imagesList.current?.scrollWidth - imagesList.current?.clientWidth
+        : undefined
+    );
+    setIsSmallDevice(window.innerWidth <= 600);
+  }, [window.innerWidth]);
 
   return (
     <div className={cn("wish")}>
