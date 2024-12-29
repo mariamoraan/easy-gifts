@@ -1,0 +1,19 @@
+.button {
+  cursor: pointer;
+  transition: border-color 0.25s;
+
+  &--primary {
+    padding: 16px 12px;
+    background: var(--button-background-color);
+    color: var(--on-button-background-color);
+    border: 1px solid transparent;
+    border-radius: 8px;
+  }
+
+  &--outlined {
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+  }
+}

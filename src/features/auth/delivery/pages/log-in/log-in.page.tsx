@@ -5,6 +5,7 @@ import { useAuth } from "../../context/auth.context";
 import { Navigate, NavLink } from "react-router-dom";
 import { AppRoutes } from "../../../../../core/router/routes";
 import { Credentials } from "../../../domain/entities/credentials";
+import { Button } from "../../../../../core/components/button/button.component";
 const cn = bind(styles);
 
 export const LoginPage = () => {
@@ -23,7 +24,10 @@ export const LoginPage = () => {
 
   return (
     <div className={cn("page")}>
-      <h1>Login</h1>
+      <h1 className={cn("page__title")}>Welcome back !</h1>
+      <p className={cn("page__text")}>
+        Not have an account? <NavLink to={AppRoutes.SIGN_UP}>Sign Up</NavLink>
+      </p>
       <form onSubmit={onSubmit} className={cn("page__form")}>
         <label htmlFor="femail" className={cn("page__form__label")}>
           Email
@@ -34,6 +38,7 @@ export const LoginPage = () => {
           className={cn("page__form__input")}
           type="email"
           value={credentials?.email}
+          placeholder="email@domain.com"
           onChange={(e) =>
             setCredentials((prev) => ({ ...prev, email: e.target.value }))
           }
@@ -51,11 +56,14 @@ export const LoginPage = () => {
             setCredentials((prev) => ({ ...prev, password: e.target.value }))
           }
         />
-        <button className={cn("page__form__submit-button")} type="submit">
-          Submit
-        </button>
+        <Button className={cn("page__form__submit-button")} type="submit">
+          Continuar
+        </Button>
       </form>
-      <NavLink to={AppRoutes.SIGN_UP}>Sign Up</NavLink>
+      <p className={cn("page__text")}>
+        Forgot your credentials?{" "}
+        <NavLink to={AppRoutes.LOGIN}>Recover Password</NavLink>
+      </p>
     </div>
   );
 };
