@@ -1,0 +1,40 @@
+{
+  "auth": {
+    "name": "Nombre",
+    "name-placeholder": "Tu nombre",
+    "password": "Contraseña",
+    "email": "Email",
+    "email-placeholder": "tuemail@dominio.com",
+    "errors": {
+      "auth/invalid-credential": "La contraseña o el email son incorrectos",
+      "auth/weak-password": "La contraseña es insegura",
+      "auth/email-already-in-use": "Ya hay un usuario con este email",
+      "generic": "Se ha producido un error"
+    },
+    "sign-up": {
+      "create-account": "Crear Cuenta",
+      "already-have-an-account": "¿Ya tienes cuenta?",
+      "login": "Inicia sesión",
+      "create-an-account": "Crea tu cuenta"
+    },
+    "login": {
+      "not-have-an-account": "¿No tienes cuenta?",
+      "sign-up": "Regístrate",
+      "welcome": "Bienvenido de nuevo",
+      "continue": "Continuar",
+      "forgot-credentials": "¿Has olvidado tus credenciales?",
+      "recover-password": "Recuperar contraseña"
+    },
+    "recover-password": {
+      "problems-to-login": "¿Problemas para entrar?",
+      "introduce-your-email": "Introduce tu email y te enviaremos un enlace para que vuelvas a entrar en tu cuenta.",
+      "send-access-link": "Enviar enlace de acceso",
+      "go-to-login": "Volver a inicio de sesión",
+      "success": "Hemos enviado un correo electrónico a {{email}} con un enlace para que recuperes el acceso a tu cuenta."
+    }
+  },
+  "home": {
+    "greeting": "Hola, {{name}}",
+    "events-summary": "{{eventsNumber}} events this month"
+  }
+}
