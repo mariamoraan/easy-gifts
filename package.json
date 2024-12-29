@@ -12,6 +12,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.62.11",
     "classnames": "^2.5.1",
     "firebase": "^11.1.0",
     "i18next": "^24.2.0",
@@ -28,6 +29,7 @@
     "@commitlint/config-conventional": "^19.6.0",
     "@eslint/js": "^9.17.0",
     "@jest/globals": "^29.7.0",
+    "@tanstack/eslint-plugin-query": "^5.62.9",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",

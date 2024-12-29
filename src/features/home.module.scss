@@ -1,6 +1,7 @@
 .page {
   padding: 24px;
   &__header {
+    margin-bottom: 32px;
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
@@ -22,5 +23,13 @@
         gap: 8px;
       }
     }
+  }
+}
+.wishes {
+  display: flex;
+  flex-direction: column;
+  &__list {
+    display: flex;
+    flex-direction: column;
   }
 }
