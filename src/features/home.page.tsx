@@ -4,14 +4,12 @@ import { LogoutIcon } from "../core/icons";
 import { bind } from "../core/styles/bind";
 import { useAuth } from "./auth/delivery/context/auth.context";
 import styles from "./home.module.scss";
-import { useFindWishes } from "./wishes/delivery/hooks/use-find-wishes.hook";
-import { WishCard } from "./wishes/delivery/components/wish-card/wish-card.component";
+import { WishList } from "./wishes/delivery/components/wish-list/wish-list.component";
 const cn = bind(styles);
 
 export const Home = () => {
   const { t } = useTranslation();
   const { logout, user } = useAuth();
-  const { wishes } = useFindWishes();
   return (
     <div className={cn("page")}>
       <div className={cn("page__header")}>
@@ -32,15 +30,7 @@ export const Home = () => {
           </Button>
         </div>
       </div>
-      <div className={cn("wishes")}>
-        <ul className={cn("wishes__list")}>
-          {wishes?.map((wish) => (
-            <li key={wish.id}>
-              <WishCard wish={wish} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <WishList />
     </div>
   );
 };

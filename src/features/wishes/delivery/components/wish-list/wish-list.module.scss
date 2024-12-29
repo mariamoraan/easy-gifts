@@ -1,0 +1,12 @@
+.wishes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+@media (max-width: 800px) {
+  .wishes {
+    display: flex;
+    flex-direction: column;
+  }
+}
