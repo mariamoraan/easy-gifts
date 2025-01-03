@@ -94,11 +94,19 @@ export const ImagesList = (props: Props) => {
             onClick={() => onClickImage(imageUrl)}
           >
             {deletableImage === imageUrl && (
-              <div className={cn("images__list__li__delete-button")}>
+              <Button
+                name="delete image"
+                className={cn("images__list__li__delete-button")}
+                type="button"
+              >
                 <CancelIcon />
-              </div>
+              </Button>
             )}
-            <img className={cn("images__list__li__img")} src={imageUrl} />
+            <img
+              className={cn("images__list__li__img")}
+              src={imageUrl}
+              aria-label={imageUrl}
+            />
           </li>
         ))}
       </ul>

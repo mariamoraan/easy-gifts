@@ -1,0 +1,12 @@
+.textarea {
+  padding: 16px 12px;
+  width: 100%;
+  margin-bottom: 16px;
+  background: var(--input-background-color);
+  color: var(--on-input-background-color);
+  border: 1px solid var(--input-background-color);
+  border-radius: 8px;
+  outline: none;
+  field-sizing: content;
+  resize: none;
+}

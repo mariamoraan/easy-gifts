@@ -1,0 +1,29 @@
+.images-fieldset {
+  padding: 0;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto auto;
+  gap: 4px 24px;
+  border: none;
+  &__legend {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  &__input {
+    margin: 0;
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  &__submit-button {
+    padding: 8px;
+    align-self: center;
+    max-height: max-content;
+    grid-area: 2 / 2 / 3 / 3;
+  }
+  &__list {
+    padding: 24px 0;
+    grid-area: 3 / 1 / 4 / 3;
+  }
+}

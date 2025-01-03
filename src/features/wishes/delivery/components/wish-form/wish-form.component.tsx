@@ -1,115 +1,25 @@
-import React, { useState } from "react";
+import { PropsWithChildren } from "react";
 import styles from "./wish-form.module.scss";
 import { bind } from "../../../../../core/styles/bind";
-import { useAuth } from "../../../../auth/delivery/context/auth.context";
-import { useNavigate } from "react-router-dom";
-import { useCreateWish } from "../../hooks/use-create-wish.hook";
-import { AppRoutes } from "../../../../../core/router/routes";
-import { Wish } from "../../../domain/entities/wish.entity";
-import { ArrowRightIcon, ImageIcon, LinkIcon } from "../../../../../core/icons";
+import { LinkIcon } from "../../../../../core/icons";
 import { Button } from "../../../../../core/components/button/button.component";
-import { ImagesList } from "../images-list/images-list.component";
+import { useWishForm } from "./context/wish-form.context";
+import WishFormName from "./components/wish-form-name/wish-form-name.component";
+import WishFormDescription from "./components/wish-form-description/wish-form-description.component";
+import { WishFormImages } from "./components/wish-form-images/wish-form-images.component";
 const cn = bind(styles);
 
-const WishForm: React.FC = () => {
-  const navigate = useNavigate();
-  const { user } = useAuth();
-  const { createWish } = useCreateWish();
-  const [name, setName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [imagesUrls, setImagesUrls] = useState<string[]>([]);
+const WishForm = ({ children }: PropsWithChildren) => {
+  const { onSubmit, onCancel } = useWishForm();
 
-  const onDeleteImage = (imageUrl: string) => {
-    setImagesUrls((prev) => prev.filter((url) => imageUrl !== url));
-  };
-  const onAddImage = (imageUrl?: string) => {
-    if (!imageUrl) return;
-    setImagesUrls((prev) => [
-      ...prev.filter((url) => url !== imageUrl),
-      imageUrl,
-    ]);
-    setImageUrl("");
-  };
-
-  const onSubmit = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    if (!user?.id) return;
-    if (!name) return;
-    const newWish: Omit<Wish, "id"> = {
-      name,
-      description,
-      owner: user?.id,
-      imagesUrls,
-    };
-    createWish(newWish);
-  };
-
-  const onCancel = () => navigate(AppRoutes.HOME);
   return (
     <form
       data-testid="wish-form"
       onSubmit={onSubmit}
       className={cn("wish-form")}
     >
-      <label htmlFor="fname" className={cn("wish-form__label")}>
-        Nombre
-      </label>
-      <input
-        id="fname"
-        name="fname"
-        type="text"
-        placeholder="Collar cordón flor"
-        className={cn("wish-form__input")}
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <label htmlFor="fdescription" className={cn("wish-form__label")}>
-        Descripción
-      </label>
-      <textarea
-        id="fdescription"
-        name="fdescription"
-        className={cn("wish-form__input", "wish-form__textarea")}
-        placeholder="Collar de cordón con flor combinada en tejido."
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      ></textarea>
-      <fieldset className={cn("wish-form__images-fieldset")}>
-        <legend className={cn("wish-form__images-fieldset__legend")}>
-          <ImageIcon /> Imágenes
-        </legend>
-        <label htmlFor="fimage" className={cn("wish-form__label")}>
-          Dirección de imagen
-        </label>
-        <input
-          id="fimage"
-          name="fimage"
-          type="text"
-          placeholder="https://static.zara.net/assets/public/a04e/7d31/2e40485da29d/59cd9266788e/04548270712-p/04548270712-p.jpg?ts=1722345808444&w=1126"
-          className={cn(
-            "wish-form__input",
-            "wish-form__images-fieldset__input"
-          )}
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        />
-        <Button
-          type="button"
-          onClick={() => onAddImage(imageUrl)}
-          className={cn("wish-form__images-fieldset__submit-button")}
-        >
-          <ArrowRightIcon />
-        </Button>
-        {imagesUrls.length ? (
-          <ImagesList
-            imagesSize="SMALL"
-            className={cn("wish-form__images-fieldset__list")}
-            imagesUrls={imagesUrls}
-            onDelete={onDeleteImage}
-          />
-        ) : null}
-      </fieldset>
+      {children}
+
       <fieldset className={cn("wish-form__images-fieldset")}>
         <legend className={cn("wish-form__images-fieldset__legend")}>
           <LinkIcon /> Links
@@ -133,3 +43,6 @@ const WishForm: React.FC = () => {
 };
 
 export default WishForm;
+WishForm.Name = WishFormName;
+WishForm.Description = WishFormDescription;
+WishForm.Images = WishFormImages;

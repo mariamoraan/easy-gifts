@@ -6,6 +6,7 @@ import { Button } from "../../../../../core/components/button/button.component";
 import { LogoutIcon } from "../../../../../core/icons";
 import { useAuth } from "../../../../auth/delivery/context/auth.context";
 import WishForm from "../../components/wish-form/wish-form.component";
+import { WishFormWrapper } from "../../components/wish-form/components/wish-form-wrapper/wish-form-wrapper.component";
 const cn = bind(styles);
 
 export const CreateWishPage = () => {
@@ -28,7 +29,13 @@ export const CreateWishPage = () => {
         </div>
       </div>
       <div>
-        <WishForm />
+        <WishFormWrapper>
+          <WishForm>
+            <WishForm.Name />
+            <WishForm.Description />
+            <WishForm.Images />
+          </WishForm>
+        </WishFormWrapper>
       </div>
     </div>
   );
