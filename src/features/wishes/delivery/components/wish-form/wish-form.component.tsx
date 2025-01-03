@@ -1,7 +1,6 @@
 import { PropsWithChildren } from "react";
 import styles from "./wish-form.module.scss";
 import { bind } from "../../../../../core/styles/bind";
-import { LinkIcon } from "../../../../../core/icons";
 import { Button } from "../../../../../core/components/button/button.component";
 import { useWishForm } from "./context/wish-form.context";
 import WishFormName from "./components/wish-form-name/wish-form-name.component";
@@ -19,12 +18,6 @@ const WishForm = ({ children }: PropsWithChildren) => {
       className={cn("wish-form")}
     >
       {children}
-
-      <fieldset className={cn("wish-form__images-fieldset")}>
-        <legend className={cn("wish-form__images-fieldset__legend")}>
-          <LinkIcon /> Links
-        </legend>
-      </fieldset>
       <div className={cn("wish-form__buttons")}>
         <Button
           importance="secondary"
