@@ -46,6 +46,7 @@ export const LoginPage = () => {
         <input
           id="femail"
           name="femail"
+          aria-label="femail"
           className={cn("page__form__input")}
           type="email"
           value={credentials?.email}
@@ -60,8 +61,10 @@ export const LoginPage = () => {
         <input
           id="fpassword"
           name="fpassword"
+          aria-label="fpassword"
           className={cn("page__form__input")}
           type="password"
+          role="password"
           value={credentials?.password}
           onChange={(e) =>
             setCredentials((prev) => ({ ...prev, password: e.target.value }))

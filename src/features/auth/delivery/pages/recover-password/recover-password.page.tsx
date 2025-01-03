@@ -44,6 +44,7 @@ export const RecoverPasswordPage = () => {
         <input
           id="femail"
           name="femail"
+          aria-label="femail"
           className={cn("page__form__input")}
           type="email"
           value={email}
