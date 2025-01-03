@@ -1,5 +1,8 @@
 .page {
+  min-height: 100dvh;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
   animation-name: appear;
   animation-duration: 200ms;
   animation-timing-function: ease-in-out;
@@ -50,6 +53,7 @@
   }
   &__textarea {
     field-sizing: content;
+    resize: none;
   }
   &__submit-button {
     margin: 24px 0;
