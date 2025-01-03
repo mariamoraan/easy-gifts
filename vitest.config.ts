@@ -12,5 +12,21 @@ export default defineConfig({
     include: ["**/*.test.{ts,tsx}"],
     globals: true,
     setupFiles: "./src/core/tests/setup.ts",
+    coverage: {
+      provider: "v8",
+      thresholds: {
+        branches: 75,
+      },
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        math: "parens-division",
+      },
+      scss: {
+        api: "modern",
+      },
+    },
   },
 });

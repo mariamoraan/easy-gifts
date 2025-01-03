@@ -51,6 +51,7 @@ export const SignUpPage = () => {
         <input
           id="fname"
           name="fname"
+          aria-label="fname"
           className={cn("page__form__input")}
           type="text"
           placeholder={t("auth.name-placeholder")}
@@ -65,6 +66,7 @@ export const SignUpPage = () => {
         <input
           id="femail"
           name="femail"
+          aria-label="femail"
           className={cn("page__form__input")}
           type="email"
           placeholder={t("auth.email-placeholder")}
@@ -79,8 +81,10 @@ export const SignUpPage = () => {
         <input
           id="fpassword"
           name="fpassword"
+          aria-label="fpassword"
           className={cn("page__form__input")}
           type="password"
+          role="password"
           value={userInfo?.password}
           onChange={(e) =>
             setUserInfo((prev) => ({ ...prev, password: e.target.value }))

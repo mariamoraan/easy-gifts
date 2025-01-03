@@ -3,11 +3,25 @@
   transition: ease 200ms;
 
   &--primary {
-    padding: 16px 12px;
+    padding: 16px 24px;
     background: var(--button-background-color);
     color: var(--on-button-background-color);
     border: 1px solid transparent;
     border-radius: 8px;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &--secondary {
+    padding: 16px 24px;
+    background: var(--background-color);
+    color: var(--button-background-color);
+    border: 1px solid var(--button-background-color);
+    border-radius: 8px;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   &--outlined {

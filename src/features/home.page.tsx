@@ -4,6 +4,9 @@ import { LogoutIcon } from "../core/icons";
 import { bind } from "../core/styles/bind";
 import { useAuth } from "./auth/delivery/context/auth.context";
 import styles from "./home.module.scss";
+import { WishList } from "./wishes/delivery/components/wish-list/wish-list.component";
+import { NavLink } from "react-router-dom";
+import { AppRoutes } from "../core/router/routes";
 const cn = bind(styles);
 
 export const Home = () => {
@@ -19,6 +22,7 @@ export const Home = () => {
           {t("home.events-summary", { eventsNumber: 5 })}
         </p>
         <div className={cn("page__header__action-bar")}>
+          <NavLink to={AppRoutes.CREATE_WISH}>Create Wish</NavLink>
           <Button
             className={cn("page__header__action-bar__button")}
             outlined
@@ -29,6 +33,7 @@ export const Home = () => {
           </Button>
         </div>
       </div>
+      <WishList />
     </div>
   );
 };
