@@ -27,6 +27,7 @@ export const Button = (props: Props) => {
   return (
     <button
       name={name}
+      aria-label={name}
       disabled={disabled}
       type={type}
       className={cn(
