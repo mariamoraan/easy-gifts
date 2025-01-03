@@ -10,6 +10,7 @@ interface Props {
   className?: string;
   name?: string;
   disabled?: boolean;
+  importance?: "primary" | "secondary";
 }
 
 export const Button = (props: Props) => {
@@ -21,6 +22,7 @@ export const Button = (props: Props) => {
     className,
     name,
     disabled,
+    importance = "primary",
   } = props;
   return (
     <button
@@ -30,7 +32,8 @@ export const Button = (props: Props) => {
       className={cn(
         "button",
         {
-          "button--primary": !outlined,
+          "button--primary": importance === "primary",
+          "button--secondary": importance === "secondary",
           "button--outlined": outlined,
           "button--disabled": disabled,
         },

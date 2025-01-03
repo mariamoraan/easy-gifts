@@ -1,3 +1,5 @@
+import { UserId } from "../../../auth/domain/entities/user-id";
+
 export interface WishLink {
   name: string;
   url: string;
@@ -8,5 +10,6 @@ export interface Wish {
   name: string;
   description?: string;
   links?: WishLink[];
-  imageUrls?: string[];
+  imagesUrls?: string[];
+  owner: UserId;
 }

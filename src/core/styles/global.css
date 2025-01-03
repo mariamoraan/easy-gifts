@@ -42,6 +42,7 @@ h1 {
 }
 
 input,
+textarea,
 button {
   font-size: 1em;
   font-family: inherit;

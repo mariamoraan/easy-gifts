@@ -6,6 +6,7 @@ import { ProtectedRoutes } from "./protected-routes";
 import { LoginPage } from "../../features/auth/delivery/pages/log-in/log-in.page";
 import { RecoverPasswordPage } from "../../features/auth/delivery/pages/recover-password/recover-password.page";
 import { AuthRoutes } from "./auth-routes";
+import { CreateWishPage } from "../../features/wishes/delivery/pages/create-wish-page/create-wish-page.page";
 
 export const AppRouter = () => {
   return (
@@ -21,6 +22,7 @@ export const AppRouter = () => {
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route index element={<Home />} />
+          <Route path={AppRoutes.CREATE_WISH} element={<CreateWishPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

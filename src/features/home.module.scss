@@ -1,5 +1,8 @@
 .page {
   padding: 24px;
+  animation-name: appear;
+  animation-duration: 200ms;
+  animation-timing-function: ease-in-out;
   &__header {
     margin-bottom: 32px;
     display: grid;
@@ -15,6 +18,8 @@
     &__action-bar {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
+      gap: 32px;
       grid-area: 1 / 2 / 3 / 3;
       &__button {
         display: flex;
@@ -23,5 +28,14 @@
         gap: 8px;
       }
     }
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

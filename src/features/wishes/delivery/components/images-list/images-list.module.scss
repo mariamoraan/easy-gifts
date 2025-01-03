@@ -1,0 +1,79 @@
+.images {
+  position: relative;
+  &__button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    margin: auto;
+    max-height: max-content;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background: var(--on-background-color-300);
+    &--left {
+      left: -12px;
+    }
+    &--right {
+      right: -12px;
+    }
+  }
+  &__list {
+    display: flex;
+    gap: 8px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    &__li {
+      position: relative;
+      max-height: 180px;
+      max-width: 120px;
+      min-width: 120px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #fafafa;
+      &--small {
+        max-height: 110px;
+        max-width: 110px;
+        min-width: 110px;
+      }
+      &__img {
+        max-height: inherit;
+        max-width: inherit;
+        width: 100%;
+        object-fit: contain;
+      }
+      &__delete-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+}
+
+@media (pointer: coarse) {
+  .images {
+    &__list {
+      &__li {
+        &__delete-button {
+          display: none;
+        }
+      }
+    }
+  }
+}

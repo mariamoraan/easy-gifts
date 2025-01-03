@@ -3,4 +3,5 @@ export const AppRoutes = {
   LOGIN: "/login",
   RECOVER_PASSWORD: "/recover-password",
   HOME: "/",
+  CREATE_WISH: "/create-wish",
 };
