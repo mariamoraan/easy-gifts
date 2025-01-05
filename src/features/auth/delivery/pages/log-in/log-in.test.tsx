@@ -5,7 +5,7 @@ import { useAuth } from "../../context/auth.context";
 import { MemoryRouter } from "react-router-dom";
 
 vi.mock("../../context/auth.context", () => ({
-  useAuth: vi.fn().mockReturnValue({ signUp: vi.fn() }),
+  useAuth: vi.fn().mockReturnValue({ signUp: vi.fn(), login: vi.fn() }),
 }));
 
 vi.mock("react-i18next", () => ({
@@ -42,8 +42,7 @@ describe("LoginPage", () => {
   });
 
   it("should handle form submission", async () => {
-    const mockLogin = vi.fn();
-    (useAuth as jest.Mock).mockReturnValue({ login: mockLogin });
+    const loginSpy = vi.spyOn(useAuth(), "login");
 
     setup();
 
@@ -55,15 +54,15 @@ describe("LoginPage", () => {
     fireEvent.change(passwordInput, { target: { value: "password123" } });
     fireEvent.click(submitButton);
 
-    expect(mockLogin).toHaveBeenCalledWith({
+    expect(loginSpy).toHaveBeenCalledWith({
       email: "test@example.com",
       password: "password123",
     });
   });
 
   it("should display error message on login failure", async () => {
-    const mockLogin = vi.fn().mockRejectedValue(new Error("login-failed"));
-    (useAuth as jest.Mock).mockReturnValue({ login: mockLogin });
+    const loginSpy = vi.spyOn(useAuth(), "login");
+    loginSpy.mockRejectedValue(new Error("login-failed"));
 
     setup();
 
