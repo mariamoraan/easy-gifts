@@ -1,7 +1,9 @@
 :root {
-  --background-color: white;
+  --background-color: #fcfcfc;
   --on-background-color: black;
-  --on-background-color-300: grey;
+  --on-background-color-300: hsl(0, 0%, 50%);
+  --on-background-color-200: hsl(0, 0%, 75%);
+  --on-background-color-100: hsl(0, 0%, 95%);
   --input-background-color: #f2f2f2;
   --on-input-background-color: #9c939f;
   --button-background-color: #6c56f2;

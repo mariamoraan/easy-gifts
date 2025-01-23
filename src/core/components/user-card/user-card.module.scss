@@ -1,0 +1,20 @@
+.user-card {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 0px 24px;
+  background: var(--on-background-color-100);
+  border-radius: 12px;
+  &__avatar {
+    grid-row: span 2 / span 2;
+  }
+  &__title {
+    font-weight: 600;
+  }
+  &__email {
+    grid-column-start: 2;
+    color: var(--on-background-color-300);
+  }
+}

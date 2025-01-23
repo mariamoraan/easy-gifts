@@ -1,35 +1,23 @@
 import { bind } from "../../../../../core/styles/bind";
 import { Wish } from "../../../domain/entities/wish.entity";
+import { formatDate } from "../../../../../core/utils/format-date";
 import styles from "./wish-card.module.scss";
-import { ImagesList } from "../images-list/images-list.component";
 const cn = bind(styles);
 
 interface Props {
   wish: Wish;
+  onClick?: (id: string) => void;
 }
 
 export const WishCard = (props: Props) => {
-  const { wish } = props;
+  const { wish, onClick } = props;
   return (
-    <div className={cn("wish")}>
+    <div className={cn("wish")} onClick={() => onClick && onClick(wish.id)}>
+      <p className={cn("wish__date")}>
+        {formatDate(new Date(wish.creationDate))}
+      </p>
       <p className={cn("wish__name")}>{wish.name}</p>
-      {wish.description && (
-        <p className={cn("wish__description")}>{wish.description}</p>
-      )}
-      {wish.imagesUrls && <ImagesList imagesUrls={wish.imagesUrls} />}
-      <ul className={cn("wish__links__list")}>
-        {wish.links?.map((link) => (
-          <li className={cn("wish__links__list__li")} key={link.url}>
-            <a
-              target="_blank"
-              className={cn("wish__links__list__li__link")}
-              href={link.url}
-            >
-              {link.name}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <p className={cn("wish__description")}>{wish.description}</p>
     </div>
   );
 };

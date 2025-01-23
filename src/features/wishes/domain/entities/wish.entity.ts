@@ -12,4 +12,5 @@ export interface Wish {
   links?: WishLink[];
   imagesUrls?: string[];
   owner: UserId;
+  creationDate: string;
 }

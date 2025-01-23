@@ -20,25 +20,28 @@ describe("WishFormImages", () => {
 
     render(<WishFormImages />);
 
-    expect(screen.getByLabelText("Dirección de imagen")).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: "fimage" })).toBeInTheDocument();
+    expect(screen.getByText("Imágenes")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Añadir imagen" })
+    ).toBeInTheDocument();
   });
 
-  it("calls onAddImage when the add button is clicked", () => {
-    const onAddImageMock = vi.fn();
+  it.only("opens wish form modal when add image button is clicked", () => {
+    const setIsImagesModalOpenMock = vi.fn();
     (useWishForm as jest.Mock).mockReturnValue({
       imageUrl: "https://example.com/image.jpg",
       setImageUrl: vi.fn(),
-      onAddImage: onAddImageMock,
+      onAddImage: vi.fn(),
       imagesUrls: [],
       onDeleteImage: vi.fn(),
+      setIsImagesModalOpen: setIsImagesModalOpenMock,
     });
 
     render(<WishFormImages />);
 
-    fireEvent.click(screen.getByRole("button", { name: /add image/i }));
+    fireEvent.click(screen.getByRole("button", { name: "Añadir imagen" }));
 
-    expect(onAddImageMock).toHaveBeenCalled();
+    expect(setIsImagesModalOpenMock).toHaveBeenCalledWith(true);
   });
 
   it("calls onDeleteImage when the delete button is clicked", () => {

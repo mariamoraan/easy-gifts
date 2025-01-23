@@ -1,82 +1,22 @@
 .wish {
   padding: 24px;
-  width: 600px;
-  max-width: max-content;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  border: 1px solid var(--on-background-color-300);
-  &__name {
+  gap: 8px;
+  background: var(--on-background-color-100);
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+  &__date {
+    font-weight: 600;
     text-transform: uppercase;
+    color: var(--on-background-color-300);
+  }
+  &__name {
+    font-weight: 600;
+    font-size: 1.3rem;
   }
   &__description {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-  &__images {
-    position: relative;
-    &__button {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      max-height: max-content;
-      padding: 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 100%;
-      background: var(--on-background-color-300);
-      &--left {
-        left: -12px;
-      }
-      &--right {
-        right: -12px;
-      }
-    }
-    &__list {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: scroll;
-      overflow-y: hidden;
-      scroll-behavior: smooth;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      &__li {
-        max-height: auto;
-        max-width: 130px;
-        &__img {
-          max-height: inherit;
-          max-width: inherit;
-          object-fit: contain;
-        }
-      }
-    }
-  }
-  &__links {
-    &__list {
-      display: flex;
-      gap: 8px 12px;
-      flex-wrap: wrap;
-      &__li:not(:last-child) {
-        &::after {
-          content: "•";
-          margin-left: 12px;
-          color: var(--on-background-color-300);
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 800px) {
-  .wish {
-    width: 100%;
-    max-width: none;
+    color: var(--on-background-color-300);
   }
 }

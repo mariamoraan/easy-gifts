@@ -1,34 +1,9 @@
 .images {
-  position: relative;
-  &__button {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    z-index: 1;
-    margin: auto;
-    max-height: max-content;
-    padding: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    background: var(--on-background-color-300);
-    &--left {
-      left: -12px;
-    }
-    &--right {
-      right: -12px;
-    }
-  }
   &__list {
-    display: flex;
-    gap: 8px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    max-width: max-content;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 24px;
     &__li {
       position: relative;
       max-height: 180px;
@@ -39,7 +14,6 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: #fafafa;
       &--small {
         max-height: 110px;
         max-width: 110px;
@@ -62,6 +36,14 @@
         align-items: center;
         background: rgba(255, 255, 255, 0.8);
       }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .images {
+    &__list {
+      grid-template-columns: repeat(2, auto);
     }
   }
 }

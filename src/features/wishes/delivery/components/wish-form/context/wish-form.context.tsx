@@ -1,7 +1,7 @@
 import { createContext, SetStateAction, useContext, useState } from "react";
 import { useCreateWish } from "../../../hooks/use-create-wish.hook";
 import { useAuth } from "../../../../../auth/delivery/context/auth.context";
-import { Wish } from "../../../../domain/entities/wish.entity";
+import { Wish, WishLink } from "../../../../domain/entities/wish.entity";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "../../../../../../core/router/routes";
 
@@ -17,6 +17,16 @@ export interface WishFormState {
   setName: React.Dispatch<SetStateAction<string>>;
   description: string;
   setDescription: React.Dispatch<SetStateAction<string>>;
+  isImagesModalOpen: boolean;
+  setIsImagesModalOpen: React.Dispatch<SetStateAction<boolean>>;
+  isLinksModalOpen: boolean;
+  setIsLinksModalOpen: React.Dispatch<SetStateAction<boolean>>;
+  onDeleteLink: (url: string) => void;
+  links: WishLink[];
+  setLinks: React.Dispatch<SetStateAction<WishLink[]>>;
+  onAddLink: (link?: WishLink) => void;
+  link: WishLink | undefined;
+  setLink: React.Dispatch<SetStateAction<WishLink | undefined>>;
 }
 
 export const WishFormContext = createContext<WishFormState>({
@@ -45,6 +55,28 @@ export const WishFormContext = createContext<WishFormState>({
   setDescription: function (): void {
     throw new Error("Function not implemented.");
   },
+  isImagesModalOpen: false,
+  setIsImagesModalOpen: function (): void {
+    throw new Error("Function not implemented.");
+  },
+  isLinksModalOpen: false,
+  setIsLinksModalOpen: function (): void {
+    throw new Error("Function not implemented.");
+  },
+  onDeleteLink: function (): void {
+    throw new Error("Function not implemented.");
+  },
+  links: [],
+  setLinks: function (): void {
+    throw new Error("Function not implemented.");
+  },
+  onAddLink: function (): void {
+    throw new Error("Function not implemented.");
+  },
+  link: undefined,
+  setLink: function (): void {
+    throw new Error("Function not implemented.");
+  },
 });
 
 export const WishFormProvider = ({ children }: React.PropsWithChildren) => {
@@ -55,6 +87,11 @@ export const WishFormProvider = ({ children }: React.PropsWithChildren) => {
   const [description, setDescription] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [imagesUrls, setImagesUrls] = useState<string[]>([]);
+  const [isImagesModalOpen, setIsImagesModalOpen] = useState(false);
+  const [isLinksModalOpen, setIsLinksModalOpen] = useState(false);
+  const [links, setLinks] = useState<WishLink[]>([]);
+  const [link, setLink] = useState<WishLink | undefined>(undefined);
+
   const onDeleteImage = (imageUrl: string) => {
     setImagesUrls((prev) => prev.filter((url) => imageUrl !== url));
   };
@@ -67,6 +104,16 @@ export const WishFormProvider = ({ children }: React.PropsWithChildren) => {
     setImageUrl("");
   };
 
+  const onAddLink = (link?: WishLink) => {
+    if (!link) return;
+    setLinks((prev) => [...prev.filter(({ url }) => url !== link.url), link]);
+    setLink(undefined);
+  };
+
+  const onDeleteLink = (url: string) => {
+    setLinks((prev) => prev.filter((link) => link.url !== url));
+  };
+
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (!user?.id) return;
@@ -76,6 +123,8 @@ export const WishFormProvider = ({ children }: React.PropsWithChildren) => {
       description,
       owner: user?.id,
       imagesUrls,
+      links,
+      creationDate: new Date().toUTCString(),
     };
     createWish(newWish);
   };
@@ -94,6 +143,16 @@ export const WishFormProvider = ({ children }: React.PropsWithChildren) => {
         setName,
         description,
         setDescription,
+        isImagesModalOpen,
+        setIsImagesModalOpen,
+        isLinksModalOpen,
+        setIsLinksModalOpen,
+        links,
+        setLinks,
+        onDeleteLink,
+        onAddLink,
+        link,
+        setLink,
       }}
     >
       {children}

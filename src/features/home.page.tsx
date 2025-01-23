@@ -1,39 +1,17 @@
 import { useTranslation } from "react-i18next";
-import { Button } from "../core/components/button/button.component";
-import { LogoutIcon } from "../core/icons";
-import { bind } from "../core/styles/bind";
 import { useAuth } from "./auth/delivery/context/auth.context";
-import styles from "./home.module.scss";
 import { WishList } from "./wishes/delivery/components/wish-list/wish-list.component";
-import { NavLink } from "react-router-dom";
-import { AppRoutes } from "../core/router/routes";
-const cn = bind(styles);
+import { Layout } from "../core/components/layout/layout.component";
 
 export const Home = () => {
   const { t } = useTranslation();
-  const { logout, user } = useAuth();
+  const { user } = useAuth();
   return (
-    <div className={cn("page")}>
-      <div className={cn("page__header")}>
-        <p className={cn("page__header__title")}>
-          {t("home.greeting", { name: user?.name })}
-        </p>
-        <p className={cn("page__header__subtitle")}>
-          {t("home.events-summary", { eventsNumber: 5 })}
-        </p>
-        <div className={cn("page__header__action-bar")}>
-          <NavLink to={AppRoutes.CREATE_WISH}>Create Wish</NavLink>
-          <Button
-            className={cn("page__header__action-bar__button")}
-            outlined
-            onClick={logout}
-            name="Logout"
-          >
-            <LogoutIcon />
-          </Button>
-        </div>
-      </div>
+    <Layout
+      title={t("home.greeting", { name: user?.name })}
+      description={t("home.events-summary", { eventsNumber: 5 })}
+    >
       <WishList />
-    </div>
+    </Layout>
   );
 };

@@ -1,0 +1,18 @@
+.wish-form-links-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  &__label {
+    grid-column: span 2 / span 2;
+  }
+  &__input {
+    min-width: 600px;
+  }
+  &__submit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: max-content;
+    max-height: max-content;
+  }
+}

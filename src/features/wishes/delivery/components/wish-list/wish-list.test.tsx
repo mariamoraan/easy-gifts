@@ -2,8 +2,16 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { WishList } from "./wish-list.component";
 import { useFindWishes } from "../../hooks/use-find-wishes.hook";
+import { MemoryRouter } from "react-router-dom";
 
 vi.mock("../../hooks/use-find-wishes.hook");
+
+const setup = () =>
+  render(
+    <MemoryRouter>
+      <WishList />
+    </MemoryRouter>
+  );
 
 describe("WishList", () => {
   it("should render a list of wishes", () => {
@@ -28,7 +36,7 @@ describe("WishList", () => {
 
     (useFindWishes as jest.Mock).mockReturnValue({ wishes: mockWishes });
 
-    render(<WishList />);
+    setup();
 
     expect(screen.getByText("Wish 1")).toBeInTheDocument();
     expect(screen.getByText("Wish 2")).toBeInTheDocument();
@@ -37,7 +45,7 @@ describe("WishList", () => {
   it("should render empty state when no wishes are found", () => {
     (useFindWishes as jest.Mock).mockReturnValue({ wishes: [] });
 
-    render(<WishList />);
+    setup();
 
     expect(screen.queryByText("Wish 1")).not.toBeInTheDocument();
     expect(screen.queryByText("Wish 2")).not.toBeInTheDocument();

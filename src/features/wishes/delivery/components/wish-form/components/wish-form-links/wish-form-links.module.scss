@@ -1,0 +1,36 @@
+.links-fieldset {
+  padding: 0;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 8px;
+  border: none;
+
+  &__legend {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  &__add-button {
+    margin-top: 12px;
+    max-width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    grid-column-start: 1;
+    grid-row-start: 3;
+  }
+  &__list {
+    grid-column-start: 1;
+    grid-row-start: 2;
+  }
+  &__no-images {
+    padding: 24px;
+    background: var(--on-background-color-100);
+    grid-column-start: 1;
+    grid-row-start: 2;
+    border-radius: 8px;
+  }
+}

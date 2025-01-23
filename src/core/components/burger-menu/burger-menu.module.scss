@@ -1,0 +1,70 @@
+.burger-menu {
+  &__dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 32px;
+    height: 100dvh;
+    width: 100dvw;
+    display: flex;
+    flex-direction: column;
+    background: var(--background-color);
+    opacity: 1;
+    transition: 200ms ease;
+    &--hidden {
+      opacity: 0;
+      z-index: -1;
+    }
+    &__close-button {
+      align-self: flex-end;
+    }
+    &__links {
+      padding-top: 24px;
+      margin: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      border-top: 1px solid var(--on-background-color-300);
+      &__li {
+        &__link {
+          padding: 8px 16px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          color: var(--on-background-color);
+          font-weight: normal;
+          border-radius: 8px;
+          &--active {
+            font-weight: 600;
+            background: #f1f1f1;
+          }
+        }
+      }
+    }
+    &__questions {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 8px;
+      color: var(--on-background-color-300);
+      &__text {
+        flex: 1;
+        white-space: nowrap;
+      }
+      &__notifications {
+        padding: 4px 4px;
+        min-width: 4ch;
+        max-width: max-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--button-background-color);
+        color: var(--on-button-background-color);
+        border-radius: 12px;
+      }
+    }
+  }
+}

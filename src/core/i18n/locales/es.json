@@ -36,5 +36,9 @@
   "home": {
     "greeting": "Hola, {{name}}",
     "events-summary": "{{eventsNumber}} events this month"
+  },
+  "wishes": {
+    "your-wishes": "Tus deseos",
+    "create-a-wish": "Crear un deseo"
   }
 }
