@@ -9,6 +9,7 @@ interface AuthState {
   signUp: (authUser: UserInfo, credentials: Credentials) => Promise<void>;
   login: (credentials: Credentials) => Promise<void>;
   logout: () => Promise<void>;
+  isAuthenticated: boolean;
 }
 
 const AuthContext = createContext<AuthState>({
@@ -22,16 +23,25 @@ const AuthContext = createContext<AuthState>({
   logout: function (): Promise<void> {
     throw new Error("Function not implemented.");
   },
+  isAuthenticated: true,
 });
 
 export const AuthProvider = ({ children }: React.PropsWithChildren) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [user, setUser] = useState<User | undefined>();
+
   useEffect(() => {
-    const setup = async () => {
-      const user = await AuthLocator.getFindLoggedUserQuery().handle();
-      setUser(user);
+    const onAuthChange = async (user: string | undefined) => {
+      if (user) {
+        const user = await AuthLocator.getFindLoggedUserQuery().handle();
+        setIsAuthenticated(true);
+        setUser(user);
+      } else {
+        setIsAuthenticated(false);
+        setUser(undefined);
+      }
     };
-    setup();
+    AuthLocator.getOnAuthChangeSubscriber().handle(onAuthChange);
   }, []);
 
   const isValidUserInfo = (authUser: UserInfo): boolean => {
@@ -76,7 +86,9 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signUp, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, signUp, login, logout, isAuthenticated }}
+    >
       {children}
     </AuthContext.Provider>
   );

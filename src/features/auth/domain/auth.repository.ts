@@ -11,4 +11,7 @@ export interface AuthRepository {
   logout: () => Promise<void>;
   getLoggedUser: () => Promise<User | undefined>;
   resetPassword: (email: string) => Promise<void>;
+  onAuthChangeSubscriber: (
+    onChange: (user: string | undefined) => Promise<void>
+  ) => Promise<void>;
 }

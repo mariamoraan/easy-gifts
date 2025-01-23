@@ -4,10 +4,12 @@ import { useFindWishes } from "../../hooks/use-find-wishes.hook";
 import { WishCard } from "../wish-card/wish-card.component";
 import styles from "./wish-list.module.scss";
 import { AppRoutes } from "../../../../../core/router/routes";
+import { useAuth } from "../../../../auth/delivery/context/auth.context";
 const cn = bind(styles);
 
 export const WishList = () => {
-  const { wishes } = useFindWishes();
+  const { user } = useAuth();
+  const { wishes } = useFindWishes({ userId: user?.id });
   const navigate = useNavigate();
 
   return (

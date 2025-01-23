@@ -29,6 +29,20 @@ export class AuthFirebaseRepository implements AuthRepository {
     });
   }
 
+  public async onAuthChangeSubscriber(
+    onChange: (user: string | undefined) => Promise<void>
+  ) {
+    onAuthStateChanged(this.auth, async (auth) => {
+      if (auth) {
+        const { uid } = auth;
+        localStorage.setItem(this.userUIDKey, uid);
+        await onChange(uid);
+      } else {
+        await onChange(undefined);
+      }
+    });
+  }
+
   public async signup(
     user: UserInfo,
     credentials: Credentials
