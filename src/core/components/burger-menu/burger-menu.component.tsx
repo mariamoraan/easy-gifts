@@ -18,7 +18,7 @@ interface Props {
 export const BurgerMenu = (props: Props) => {
   const { className } = props;
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
@@ -74,6 +74,9 @@ export const BurgerMenu = (props: Props) => {
             8
           </span>
         </div>
+        <Button onClick={logout} outlined>
+          Logout
+        </Button>
       </div>
     </div>
   );
