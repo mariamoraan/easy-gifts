@@ -5,6 +5,8 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  setPersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { AuthRepository } from "../domain/auth.repository";
@@ -15,18 +17,11 @@ import { UserInfo } from "../domain/entities/user-info";
 import { User } from "../domain/entities/user";
 
 export class AuthFirebaseRepository implements AuthRepository {
-  private readonly userUIDKey = "USER_UID";
   private auth = getAuth();
   private db = getFirestore(app);
 
   constructor() {
-    onAuthStateChanged(this.auth, (user) => {
-      if (user) {
-        localStorage.setItem(this.userUIDKey, user.uid);
-      } else {
-        localStorage.removeItem(this.userUIDKey);
-      }
-    });
+    setPersistence(this.auth, browserLocalPersistence);
   }
 
   public async onAuthChangeSubscriber(
@@ -35,7 +30,6 @@ export class AuthFirebaseRepository implements AuthRepository {
     onAuthStateChanged(this.auth, async (auth) => {
       if (auth) {
         const { uid } = auth;
-        localStorage.setItem(this.userUIDKey, uid);
         await onChange(uid);
       } else {
         await onChange(undefined);
@@ -81,7 +75,7 @@ export class AuthFirebaseRepository implements AuthRepository {
   }
 
   public async getLoggedUser(): Promise<User | undefined> {
-    const userUID = localStorage.getItem(this.userUIDKey) ?? undefined;
+    const userUID = this?.auth?.currentUser?.uid ?? undefined;
     if (!userUID) return undefined;
     const currentUser = await this.getUserById(userUID);
     return currentUser;
