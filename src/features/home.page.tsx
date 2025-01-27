@@ -7,10 +7,7 @@ export const Home = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   return (
-    <Layout
-      title={t("home.greeting", { name: user?.name })}
-      description={t("home.events-summary", { eventsNumber: 5 })}
-    >
+    <Layout title={t("home.greeting", { name: user?.name })}>
       <WishList />
     </Layout>
   );
