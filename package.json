@@ -23,7 +23,8 @@
     "react-dom": "^19.0.0",
     "react-i18next": "^15.2.0",
     "react-icons": "^5.4.0",
-    "sass": "^1.83.0"
+    "sass": "^1.83.0",
+    "vite-plugin-pwa": "^0.21.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",

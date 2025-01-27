@@ -1,7 +1,7 @@
 :root {
   --background-color: #fcfcfc;
   --on-background-color: black;
-  --on-background-color-300: hsl(0, 0%, 50%);
+  --on-background-color-300: #808080;
   --on-background-color-200: hsl(0, 0%, 75%);
   --on-background-color-100: hsl(0, 0%, 95%);
   --input-background-color: #f2f2f2;
