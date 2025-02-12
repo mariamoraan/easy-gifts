@@ -8,6 +8,7 @@ import { RecoverPasswordPage } from "../../features/auth/delivery/pages/recover-
 import { AuthRoutes } from "./auth-routes";
 import { CreateWishPage } from "../../features/wishes/delivery/pages/create-wish-page/create-wish-page.page";
 import { WishPage } from "../../features/wishes/delivery/pages/wish/wish.page";
+import { ProfilePage } from "../../features/user/delivery/pages/profile/profile.page";
 
 export const AppRouter = () => {
   return (
@@ -25,6 +26,7 @@ export const AppRouter = () => {
           <Route index element={<Home />} />
           <Route path={AppRoutes.CREATE_WISH} element={<CreateWishPage />} />
           <Route path={AppRoutes.WISH_ABSOLUTE} element={<WishPage />} />
+          <Route path={AppRoutes.PROFILE_ABSOLUTE} element={<ProfilePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

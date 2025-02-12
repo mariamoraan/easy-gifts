@@ -14,4 +14,5 @@ export interface AuthRepository {
   onAuthChangeSubscriber: (
     onChange: (user: string | undefined) => Promise<void>
   ) => Promise<void>;
+  getUserById: (uid: string) => Promise<User | undefined>;
 }

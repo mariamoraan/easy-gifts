@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { MENU_LINKS } from "../../constants/menu-links";
 import { QuestionIcon, CloseIcon, MenuIcon } from "../../icons";
 import { bind } from "../../styles/bind";
 
@@ -9,6 +8,7 @@ import { Button } from "../button/button.component";
 import { useState } from "react";
 import { useAuth } from "../../../features/auth/delivery/context/auth.context";
 import { UserCard } from "../user-card/user-card.component";
+import { MenuLinks } from "../../constants/menu-links";
 const cn = bind(styles);
 
 interface Props {
@@ -22,6 +22,9 @@ export const BurgerMenu = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
+
+  if (!user) return null;
+  const menuLinks = new MenuLinks(user);
 
   return (
     <div className={cn("burger-menu", className)}>
@@ -41,7 +44,7 @@ export const BurgerMenu = (props: Props) => {
           <CloseIcon />
         </Button>
         <ul className={cn("burger-menu__dropdown__links")}>
-          {MENU_LINKS.map((link) => (
+          {menuLinks.getLinks().map((link) => (
             <li
               className={cn("burger-menu__dropdown__links__li")}
               key={link.href}

@@ -3,6 +3,7 @@ import { LogoutCommand } from "../application/commands/logout.command";
 import { OnAuthChangeSubscriber } from "../application/commands/on-auth-change-subscriber.command";
 import { SignUpCommand } from "../application/commands/sign-up.command";
 import { FindLoggedUserQuery } from "../application/queries/find-logged-user.query";
+import { FindUserQuery } from "../application/queries/find-user.query";
 import { RecoverPasswordQuery } from "../application/queries/recover-password.query";
 import { AuthRepository } from "../domain/auth.repository";
 import { AuthFirebaseRepository } from "../infrastructure/auth-firebase.repository";
@@ -28,5 +29,8 @@ export class AuthLocator {
   }
   static getOnAuthChangeSubscriber() {
     return new OnAuthChangeSubscriber(this.getRepository());
+  }
+  static getFindUserQuery() {
+    return new FindUserQuery(this.getRepository());
   }
 }

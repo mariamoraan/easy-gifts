@@ -6,4 +6,6 @@ export const AppRoutes = {
   CREATE_WISH: "/create-wish",
   WISH: (id: string) => `/wish/${id}`,
   WISH_ABSOLUTE: "/wish/:wishId",
+  PROFILE: (userId: string) => `/profile/${userId}`,
+  PROFILE_ABSOLUTE: "/profile/:userId",
 };
