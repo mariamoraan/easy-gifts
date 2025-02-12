@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { WishList } from "./wish-list.component";
 import { MemoryRouter } from "react-router-dom";
 import { Wish } from "../../../domain/entities/wish.entity";
