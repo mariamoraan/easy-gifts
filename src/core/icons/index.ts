@@ -10,6 +10,7 @@ import { IoIosMenu } from "react-icons/io";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaQuestion } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
+import { FaRegUser } from "react-icons/fa";
 
 export {
   CiLogout as LogoutIcon,
@@ -24,4 +25,5 @@ export {
   IoCloseOutline as CloseIcon,
   FaQuestion as QuestionIcon,
   BsPlusLg as PlusIcon,
+  FaRegUser as UserIcon,
 };

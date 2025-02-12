@@ -1,15 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { bind } from "../../../../../core/styles/bind";
-import { useFindWishes } from "../../hooks/use-find-wishes.hook";
 import { WishCard } from "../wish-card/wish-card.component";
 import styles from "./wish-list.module.scss";
 import { AppRoutes } from "../../../../../core/router/routes";
-import { useAuth } from "../../../../auth/delivery/context/auth.context";
+import { Wish } from "../../../domain/entities/wish.entity";
 const cn = bind(styles);
 
-export const WishList = () => {
-  const { user } = useAuth();
-  const { wishes } = useFindWishes({ userId: user?.id });
+interface Props {
+  wishes: Wish[];
+}
+
+export const WishList = (props: Props) => {
+  const { wishes } = props;
   const navigate = useNavigate();
 
   return (

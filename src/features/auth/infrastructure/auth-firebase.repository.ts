@@ -58,7 +58,7 @@ export class AuthFirebaseRepository implements AuthRepository {
     return currentUser;
   }
 
-  private async getUserById(userId: string): Promise<User | undefined> {
+  public async getUserById(userId: string): Promise<User | undefined> {
     const docRef = doc(this.db, "users", userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {

@@ -5,7 +5,7 @@ import { useAuth } from "../../../features/auth/delivery/context/auth.context";
 import { Button } from "../button/button.component";
 import styles from "./side-menu.module.scss";
 import { LogoutIcon } from "../../icons";
-import { MENU_LINKS } from "../../constants/menu-links";
+import { MenuLinks } from "../../constants/menu-links";
 const cn = bind(styles);
 
 interface Props {
@@ -15,7 +15,10 @@ interface Props {
 export const SideMenu = (props: Props) => {
   const { className } = props;
   const { t } = useTranslation();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
+
+  if (!user) return null;
+  const menuLinks = new MenuLinks(user);
 
   return (
     <menu className={cn("side-menu", className)}>
@@ -24,7 +27,7 @@ export const SideMenu = (props: Props) => {
         <p className={cn("side-menu__header__version")}>v0.1</p>
       </div>
       <ul className={cn("side-menu__links")}>
-        {MENU_LINKS.map((link) => (
+        {menuLinks.getLinks().map((link) => (
           <li className={cn("side-menu__links__li")} key={link.href}>
             <NavLink
               className={({ isActive }) =>

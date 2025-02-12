@@ -22,7 +22,10 @@ export const WishFormLinks = () => {
         type="button"
         name="Añadir link"
         className={cn("links-fieldset__add-button")}
-        onClick={() => setIsLinksModalOpen(true)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsLinksModalOpen(true);
+        }}
       >
         Añadir link
         <PlusIcon />
