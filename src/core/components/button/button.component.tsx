@@ -3,7 +3,7 @@ import styles from "./button.module.scss";
 const cn = bind(styles);
 
 interface Props {
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
   children: React.ReactNode | string;
   outlined?: boolean;
   type?: "button" | "reset" | "submit";

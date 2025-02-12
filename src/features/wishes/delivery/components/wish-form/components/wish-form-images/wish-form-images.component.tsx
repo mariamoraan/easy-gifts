@@ -27,7 +27,10 @@ export const WishFormImages = () => {
         name="Añadir imagen"
         type="button"
         className={cn("images-fieldset__add-button")}
-        onClick={() => setIsImagesModalOpen(true)}
+        onClick={(e: React.MouseEvent) => {
+          e.stopPropagation();
+          setIsImagesModalOpen(true);
+        }}
       >
         Añadir imagen
         <PlusIcon />
