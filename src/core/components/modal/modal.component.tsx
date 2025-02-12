@@ -19,7 +19,7 @@ export const Modal = (props: Props) => {
   const modalContent = useRef(null);
   const onCloseModal = () => console.log("onCloseModal");
   useClickOutside(modalContent, onCloseModal);
-  if (!modalRoot) return null;
+  if (!modalRoot || !isOpen) return null;
 
   return ReactDOM.createPortal(
     <div className={cn("modal", { "modal--open": isOpen })}>

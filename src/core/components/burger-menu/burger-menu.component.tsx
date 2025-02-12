@@ -28,10 +28,11 @@ export const BurgerMenu = (props: Props) => {
 
   return (
     <div className={cn("burger-menu", className)}>
-      <Button outlined onClick={toggleMenu}>
+      <Button name="Menu" outlined onClick={toggleMenu}>
         <MenuIcon />
       </Button>
-      <div
+      <menu
+        role="menu"
         className={cn("burger-menu__dropdown", {
           "burger-menu__dropdown--hidden": !isOpen,
         })}
@@ -77,10 +78,10 @@ export const BurgerMenu = (props: Props) => {
             8
           </span>
         </div>
-        <Button onClick={logout} outlined>
+        <Button name="" onClick={logout} outlined>
           Logout
         </Button>
-      </div>
+      </menu>
     </div>
   );
 };

@@ -1,18 +1,24 @@
 .wish-form-images-modal {
+  width: 600px;
   display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
   gap: 8px;
   &__label {
     grid-column: span 2 / span 2;
   }
   &__input {
     grid-row-start: 2;
-    min-width: 600px;
   }
   &__submit {
     grid-row-start: 2;
     max-width: max-content;
     max-height: max-content;
+  }
+}
+
+@media (max-width: 800px) {
+  .wish-form-images-modal {
+    width: 80dvw;
   }
 }

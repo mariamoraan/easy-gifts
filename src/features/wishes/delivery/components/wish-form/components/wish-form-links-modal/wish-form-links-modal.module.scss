@@ -6,7 +6,8 @@
     grid-column: span 2 / span 2;
   }
   &__input {
-    min-width: 600px;
+    width: 600px;
+    max-width: 100%;
   }
   &__submit {
     display: flex;
