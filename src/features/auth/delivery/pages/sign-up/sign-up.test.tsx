@@ -45,8 +45,7 @@ describe("SignUpPage", () => {
   });
 
   it("should handle form submission", async () => {
-    const mockSignUp = vi.fn();
-    (useAuth as jest.Mock).mockReturnValue({ signUp: mockSignUp });
+    const mockSignUp = vi.spyOn(useAuth(), "signUp");
 
     setup();
     const nameInput = screen.getByRole("textbox", { name: "fname" });
@@ -66,8 +65,9 @@ describe("SignUpPage", () => {
   });
 
   it("should display error message on sign-up failure", async () => {
-    const mockSignUp = vi.fn().mockRejectedValue(new Error("sign-up-failed"));
-    (useAuth as jest.Mock).mockReturnValue({ signUp: mockSignUp });
+    vi.spyOn(useAuth(), "signUp").mockRejectedValue(
+      new Error("sign-up-failed")
+    );
 
     setup();
     const nameInput = screen.getByRole("textbox", { name: "fname" });
